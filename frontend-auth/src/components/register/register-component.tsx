@@ -2,7 +2,7 @@
 
 import { registerAction } from "@/actions/auth-action";
 import { initialState } from "@/helpers/form-validation";
-import React, { useActionState, useEffect } from "react";
+import React, { useActionState, useEffect, useState } from "react"; // useState ekledik
 import { Form, Alert, Row, Col } from "react-bootstrap";
 import TextInput from "../common/form-fields/text-input";
 import PasswordInput from "../common/form-fields/password-input";
@@ -14,14 +14,24 @@ interface RegisterComponentProps {
 
 const RegisterComponent = ({ setShowLogin }: RegisterComponentProps) => {
   const [state, formAction, isPending] = useActionState(registerAction, initialState);
+  const [seconds, setSeconds] = useState(3); // Geri sayım için state
 
   useEffect(() => {
     if (state?.ok) {
-      // Kayıt başarılıysa 3 saniye sonra paneli Login tarafına kaydırır
+      // 3 saniyelik geri sayımı başlatan interval
+      const interval = setInterval(() => {
+        setSeconds((prev) => (prev > 1 ? prev - 1 : 1));
+      }, 2000);
+
+      // Paneli kaydıran timer
       const timer = setTimeout(() => {
-        setShowLogin(true); // Parent'taki setRightPanelActive(false) fonksiyonunu tetikler
-      }, 3000);
-      return () => clearTimeout(timer);
+        setShowLogin(true);
+      }, 4000);
+
+      return () => {
+        clearInterval(interval);
+        clearTimeout(timer);
+      };
     }
   }, [state?.ok, setShowLogin]);
 
@@ -35,7 +45,7 @@ const RegisterComponent = ({ setShowLogin }: RegisterComponentProps) => {
       {state?.ok && state?.message && (
         <Alert variant="success" className="mb-3 py-2 small border-0 bg-success text-white">
           <i className="pi pi-check-circle me-2"></i>
-          {state.message} - Sliding to login...
+          {state.message} - Sliding to login in <strong>{seconds}s</strong>...
         </Alert>
       )}
 
