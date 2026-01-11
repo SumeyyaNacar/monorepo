@@ -7,7 +7,6 @@ Bu proje, modern web teknolojileri kullanılarak geliştirilmiş tam kapsamlı b
 📂 Proje Yapısı
 
 Monorepo mimarisi ile organize edilmiş klasör yapısı:
-```bash
 monorepo/
 ├── frontend-auth/   # Next.js 15 tabanlı frontend
 └── backend-auth/    # LoopBack 4 tabanlı REST API
