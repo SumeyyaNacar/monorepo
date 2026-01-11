@@ -1,0 +1,15 @@
+@use "@/styles/variables.scss" as *;
+@use "@/styles/mixins.scss" as *;
+
+.text-base {
+  position: relative;
+
+  .form-control {
+    border: none;
+    @include borderRadius(0px);
+    border-bottom: 1px solid $mainColor-blue;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    color: $mainColor-blue;
+  }
+}

@@ -1,0 +1,213 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+@import "bootstrap/scss/bootstrap";
+@import "primereact/resources/themes/lara-light-cyan/theme.css";
+@import "primeicons/primeicons.css";
+
+$transition-speed: 0.8s;
+$transition-curve: cubic-bezier(0.7, 0, 0.3, 1);
+
+body {
+  background-image: url("/bg-img.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin: 0;
+  @include flexbox(column, center, center);
+
+  main {
+    width: 100%;
+    @include flexbox(column, center, center);
+    padding: 20px;
+  }
+}
+
+.glass-container {
+  position: relative;
+  background: rgba($mainColor-blue, 0.6) !important; 
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba($mainColor-white, 0.15);
+  @include borderRadius(50px); 
+  min-height: 580px;
+  width: 100%;
+  max-width: 850px;
+  overflow: hidden;
+  box-shadow: 0 14px 28px rgba($mainColor-black, 0.4);
+
+  h1, h2, h3, h6, p, label {
+    color: $mainColor-white !important;
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 95%;
+    min-height: 620px;
+    @include borderRadius(30px);
+  }
+}
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  padding: 3rem;
+  @include flexbox(column, center, center);
+  transition: all $transition-speed $transition-curve;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 2rem 1.5rem;
+    
+    &.sign-in, &.sign-up {
+      left: 0;
+      transform: none !important;
+    }
+  }
+}
+
+.sign-in { 
+  left: 0; 
+  z-index: 2; 
+  opacity: 1;
+}
+
+.sign-up { 
+  left: 0; 
+  z-index: 1;
+  opacity: 0;
+}
+
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 100;
+  transition: transform $transition-speed $transition-curve;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.overlay {
+  background: linear-gradient(135deg, $mainColor-gold 0%, $mainColor-amber 100%);
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transition: transform $transition-speed $transition-curve;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    top: 0;
+    left: 0;
+  }
+}
+
+.overlay-panel {
+  position: absolute;
+  @include flexbox(column, center, center);
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transition: transform $transition-speed $transition-curve;
+
+  h1 {
+    font-size: 2.5rem;
+    color: $mainColor-blue !important;
+    white-space: nowrap;
+  }
+  
+  p {
+    color: $mainColor-blue !important;
+    margin: 1.5rem 0;
+  }
+}
+
+.overlay-left { transform: translateX(-20%); }
+.overlay-right { right: 0; transform: translateX(0); }
+
+.glass-container.right-panel-active {
+  .overlay-container { transform: translateX(-100%); }
+  .overlay { transform: translateX(50%); }
+  
+  .sign-in { 
+    transform: translateX(100%);
+    opacity: 0;
+    @media (max-width: 768px) { display: none; }
+  }
+  
+  .sign-up {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    @media (max-width: 768px) { transform: none; }
+  }
+
+  .overlay-left { transform: translateX(0); }
+  .overlay-right { transform: translateX(20%); }
+}
+
+@keyframes show {
+  0%, 49.99% { opacity: 0; z-index: 1; }
+  50%, 100% { opacity: 1; z-index: 5; }
+}
+
+.form-control {
+  background: rgba($mainColor-white, 0.1) !important; 
+  border: 1px solid rgba($mainColor-white, 0.2) !important;
+  color: $mainColor-white !important; 
+  @include borderRadius(50px);
+  padding: 12px 20px;
+  margin-bottom: 1rem;
+
+  &:focus {
+    background: rgba($mainColor-white, 0.2) !important;
+    border-color: $mainColor-gold !important;
+    box-shadow: none;
+  }
+}
+
+.overlay-button {
+  background: transparent !important;
+  border: 2px solid $mainColor-blue;
+  @include borderRadius(50px);
+  padding: 10px 45px;
+  font-weight: 700;
+  color: $mainColor-blue !important;
+  @include transition(all 0.3s ease);
+
+  &:hover {
+    background: $mainColor-blue !important;
+    color: $mainColor-white !important; 
+  }
+}
+
+.mobile-switch {
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+    margin-top: 1.5rem;
+    color: $mainColor-white;
+    span {
+      color: $mainColor-gold;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-left: 5px;
+    }
+  }
+}
