@@ -18,17 +18,13 @@ monorepo/
 frontend-auth/
 
 React 19 & Next.js 15 (App Router)
-
 Kullanıcı kayıt ve giriş arayüzleri
-
 Form validasyonları ve bildirim sistemi
 
 backend-auth/
 
 LoopBack 4 (TypeScript)
-
 JWT tabanlı authentication
-
 Güvenli şifreleme ve REST API servisleri
 
 🛠️ Kullanılan Teknolojiler
@@ -37,9 +33,7 @@ Güvenli şifreleme ve REST API servisleri
 Framework: LoopBack 4 (TypeScript)
 
 Güvenlik
-
 bcryptjs → Şifre hashleme
-
 jsonwebtoken (JWT) → Token tabanlı yetkilendirme
 
 Çalışma Ortamı
@@ -49,35 +43,23 @@ Node.js v20, v22 veya v24
 🎨 Frontend (frontend-auth)
 
 Framework
-
 Next.js 15.1.6
-
 React 19
-
 Stil & UI
-
 Sass → Değişken & mixin destekli CSS
-
 PrimeReact & PrimeIcons → UI bileşenleri
-
 React-Bootstrap → Grid sistemi
-
 Form & Bildirim
-
 Yup → Form doğrulama
 
-SweetAlert2 → Bildirim & uyarılar
-
 Performans
-
 React Compiler desteği
 
 ⚙️ Kurulum ve Çalıştırma
-
 Aşağıdaki adımları sırasıyla takip ederek projeyi yerel ortamında çalıştırabilirsin.
 
 1️⃣ Repoyu Klonlayın
-```bash
+
 git clone https://github.com/SumeyyaNacar/monorepo.git
 cd monorepo
 
@@ -111,18 +93,13 @@ npm run dev -- -p 3001
 🪪 JWT tabanlı authentication
 
 🔒 Hashlenmiş şifre saklama
-
 📦 Monorepo mimarisi
-
 🎨 Modern ve responsive UI
-
 🧪 API Explorer ile endpoint test imkanı
 
 
 📌 Notlar
 
 Backend ve frontend bağımsız portlarda çalışır
-
 Geliştirme ortamı için .env dosyaları opsiyonel olarak eklenebilir
-
 Proje eğitim ve geliştirme amaçlıdır
